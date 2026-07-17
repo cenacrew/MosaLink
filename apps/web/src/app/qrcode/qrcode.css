@@ -1,12 +1,12 @@
 /* ============================================================
    /qrcode — bento dashboard
-   Identity: portfolio navy (#0d0c62) + cream (#EBE3E0), Raleway body,
+   Identity: brand navy (#0d0c62) + cream (#EBE3E0), Raleway body,
    Bricolage Grotesque display. The board chrome stays monochrome; each
    widget's own content brings the colour. Mobile-first, 3 cols / 4 cols.
    ============================================================ */
 
 .qr-page {
-  /* Two base colours drive the whole board. Default = portfolio cream + navy.
+  /* Two base colours drive the whole board. Default = brand cream + navy.
      The palette button (randoma11y) overrides --c1/--c2 inline at runtime; the
      rest of the palette is derived from them so everything stays legible, and
      dark mode simply swaps which one is paper and which one is ink. */

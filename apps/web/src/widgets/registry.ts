@@ -106,7 +106,7 @@ export const registry: Record<WidgetType, RegistryEntry> = {
       title: "Livre d'or",
       prompt: "Laisse-moi un petit mot",
       seed: [
-        { author: "Léa", message: "Super portfolio, bravo !", createdAt: "2026-01-02T10:00:00.000Z" },
+        { author: "Léa", message: "Super dashboard, bravo !", createdAt: "2026-01-02T10:00:00.000Z" },
         { author: "Marco", message: "J'adore le dashboard bento.", createdAt: "2026-01-03T18:30:00.000Z" },
       ],
     } satisfies guestbook.GuestbookConfig,

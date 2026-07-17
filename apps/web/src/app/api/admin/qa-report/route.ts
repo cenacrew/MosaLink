@@ -17,7 +17,7 @@ interface QaResult {
 }
 
 // The repo the QA issue is opened against. Override with GITHUB_REPO if needed.
-const GITHUB_REPO = process.env.GITHUB_REPO || "cenacrew/Portfolio";
+const GITHUB_REPO = process.env.GITHUB_REPO || "cenacrew/MosaLink";
 
 function stamp(d: Date): string {
   const p = (n: number) => String(n).padStart(2, "0");
