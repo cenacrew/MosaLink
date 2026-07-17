@@ -62,10 +62,21 @@ const nextConfig: NextConfig = {
     // technical sub-domain, tell crawlers not to index it. metadataBase and
     // canonicals stay https://cenacrew.com, so shared links keep pointing at the
     // public host.
+    //
+    // IMPORTANT: match on x-forwarded-host, NOT host. Through the hub's
+    // multi-zone proxy, the request Next.js sees here always has
+    // Host: mosalink.cenacrew.com (that's how the proxy routes to this zone),
+    // even when the client's original request was to cenacrew.com/qrcode. A
+    // `type: "host"` match would therefore fire on EVERY request served
+    // through the proxy — including the public cenacrew.com/qrcode traffic
+    // the printed QR codes point at — and noindex it too. x-forwarded-host
+    // instead carries the client's original host: mosalink.cenacrew.com only
+    // on direct access to the sub-domain, and www.cenacrew.com/cenacrew.com
+    // when reached through the proxy, so only direct access gets noindexed.
     return [
       {
         source: "/:path*",
-        has: [{ type: "host", value: "mosalink.cenacrew.com" }],
+        has: [{ type: "header", key: "x-forwarded-host", value: "mosalink.cenacrew.com" }],
         headers: [{ key: "X-Robots-Tag", value: "noindex" }],
       },
     ];
