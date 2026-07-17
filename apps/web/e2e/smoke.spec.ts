@@ -59,10 +59,14 @@ for (const vp of [
   });
 }
 
-test("/ (portfolio) responds 200 and renders", async ({ page }) => {
-  const res = await page.goto("/", { waitUntil: "domcontentloaded" });
-  expect(res?.status(), "/ HTTP status").toBe(200);
-  await expect(page.locator("body")).toBeVisible();
+test("/ (zone root) 308-redirects to the hub", async ({ page }) => {
+  // The technical zone root is not a public page: it permanently redirects to
+  // cenacrew.com. Assert the redirect itself without following it (the target is
+  // the external hub, unreachable from CI).
+  const res = await page.request.get("/", { maxRedirects: 0 });
+  expect(res.status(), "/ HTTP status").toBe(308);
+  // Next normalizes the destination with a trailing slash.
+  expect(res.headers()["location"], "/ redirect target").toBe("https://cenacrew.com/");
 });
 
 // Regression guard for the phase-17 "Jouer button is inert" bug: the modal

@@ -73,7 +73,7 @@ export default async function LetterboxdRenderer({ config }: WidgetRendererProps
   let films: Film[] = [];
   try {
     const res = await fetch(`https://letterboxd.com/${config.username}/rss/`, {
-      headers: { "User-Agent": "cenacrew-portfolio/1.0 (+https://cenacrew.com)" },
+      headers: { "User-Agent": "cenacrew-mosalink/1.0 (+https://cenacrew.com)" },
       next: { revalidate: 3600 },
     });
     // Fetch a generous window (phase 4.10 A15); the tile shows as many as fit

@@ -4,6 +4,7 @@ import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
 import { Eyebrow, tap } from "../../components/ui";
+import { BASE_URL } from "../../lib/config";
 import { space, useTheme } from "../../lib/theme";
 
 // The web QA console (phase 9). It's a web page (it renders the real public web
@@ -15,7 +16,7 @@ import { space, useTheme } from "../../lib/theme";
 // ?bp=mobile (phase 18): from the app, the console audits ONLY the mobile
 // 3-column context — fewer tiles (WebView memory) and exactly what this device
 // can show. The desktop 9-column context is audited from a PC (no param).
-const QA_URL = "https://www.cenacrew.com/adminqrcode/test?bp=mobile";
+const QA_URL = `${BASE_URL}/adminqrcode/test?bp=mobile`;
 
 export default function TestWidgets() {
   const t = useTheme();

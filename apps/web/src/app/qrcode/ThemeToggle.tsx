@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 // Standalone dark-mode control for the dashboard (the QR page has no site
-// nav). Uses the same mechanism as the portfolio: toggles `dark-mode` on
+// nav). Uses the same shared mechanism as the hub: toggles `dark-mode` on
 // <body> and persists the choice in localStorage.
 export default function ThemeToggle() {
   const [dark, setDark] = useState(false);

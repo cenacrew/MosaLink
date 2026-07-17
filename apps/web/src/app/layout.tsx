@@ -11,7 +11,8 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  metadataBase: new URL("https://cenacrew.com"),
+  title: "MosaLink",
   description: "",
 };
 

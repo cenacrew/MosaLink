@@ -7,7 +7,7 @@ import type { GithubStatsConfig } from "./schema";
 const GH = {
   headers: {
     Accept: "application/vnd.github+json",
-    "User-Agent": "cenacrew-portfolio",
+    "User-Agent": "cenacrew-mosalink",
   },
   next: { revalidate: 3600 },
 } as const;

@@ -10,6 +10,7 @@ import { Banner, Button, Card, Chip, Eyebrow, Muted, SectionTitle, Title, succes
 import { VersionSelector } from "../../components/VersionSelector";
 import { persistLayouts } from "../../lib/actions";
 import { useAuth } from "../../lib/auth";
+import { BASE_URL } from "../../lib/config";
 import { useDashboards } from "../../lib/dashboards";
 import { syncMaLocationOnce } from "../../lib/maLoc";
 import { syncPresenceOnce } from "../../lib/presence";
@@ -21,7 +22,6 @@ const GAP = 10;
 
 // Public web origin hosting the admin API (same base the preview / QA WebView
 // use). The QA badge count is fetched from here with the app's session JWT.
-const WEB_BASE = "https://www.cenacrew.com";
 
 export default function Dashboard() {
   const t = useTheme();
@@ -41,7 +41,7 @@ export default function Dashboard() {
   const fetchQaPending = useCallback(async () => {
     if (!token) return;
     try {
-      const res = await fetch(`${WEB_BASE}/api/admin/qa-pending-count`, {
+      const res = await fetch(`${BASE_URL}/api/admin/qa-pending-count`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) return;
