@@ -57,30 +57,19 @@ const nextConfig: NextConfig = {
       fallback: [],
     };
   },
-  async headers() {
-    // The zone host is indexable ONLY through cenacrew.com. When reached on its
-    // technical sub-domain, tell crawlers not to index it. metadataBase and
-    // canonicals stay https://cenacrew.com, so shared links keep pointing at the
-    // public host.
-    //
-    // IMPORTANT: match on x-forwarded-host, NOT host. Through the hub's
-    // multi-zone proxy, the request Next.js sees here always has
-    // Host: mosalink.cenacrew.com (that's how the proxy routes to this zone),
-    // even when the client's original request was to cenacrew.com/qrcode. A
-    // `type: "host"` match would therefore fire on EVERY request served
-    // through the proxy — including the public cenacrew.com/qrcode traffic
-    // the printed QR codes point at — and noindex it too. x-forwarded-host
-    // instead carries the client's original host: mosalink.cenacrew.com only
-    // on direct access to the sub-domain, and www.cenacrew.com/cenacrew.com
-    // when reached through the proxy, so only direct access gets noindexed.
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "header", key: "x-forwarded-host", value: "mosalink.cenacrew.com" }],
-        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
-      },
-    ];
-  },
 };
+
+// NOTE: we intentionally do NOT set X-Robots-Tag: noindex here (headers()
+// used to condition it on `host` then on `x-forwarded-host`). At the Vercel
+// edge, requests routed through the hub's multi-zone proxy get BOTH Host and
+// x-forwarded-host normalized to this zone's destination host
+// (mosalink.cenacrew.com) — there is no header on the request Next.js sees
+// here that reliably distinguishes "reached directly" from "proxied via
+// cenacrew.com/qrcode". Any header-based condition therefore risks firing on
+// the public cenacrew.com/qrcode traffic the printed QR codes point at and
+// noindexing it too. Anti-indexation of the technical sub-domain is instead
+// handled by robots.ts (blanket Disallow, see that file) plus the canonical
+// URLs (metadataBase stays https://cenacrew.com), neither of which depends on
+// header normalization at the edge.
 
 export default nextConfig;
