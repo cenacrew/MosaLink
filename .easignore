@@ -1,0 +1,72 @@
+# EAS Build ignore file.
+#
+# When this file exists at the repo root, EAS Build uses it INSTEAD OF every
+# .gitignore in the repo (root, apps/web, apps/mobile) — it does not merge
+# with them. It mirrors the exclusions from those .gitignore files so EAS
+# uploads stay small, EXCEPT it deliberately does NOT exclude
+# apps/mobile/google-services.json: that file is required for Android FCM
+# push credentials at build time but must stay out of git because this repo
+# is public. Keep this file's exclusions in sync with the .gitignore files
+# whenever they change (other than the google-services.json carve-out).
+
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# builds / bundlers
+.next/
+out/
+build/
+dist/
+web-build/
+.expo/
+.kotlin/
+*.tsbuildinfo
+next-env.d.ts
+expo-env.d.ts
+
+# testing
+coverage/
+test-results/
+playwright-report/
+qa-screenshots/
+playwright/.cache
+
+# native secrets (still gitignored, just not this one)
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# env files
+.env
+.env.*
+!.env.example
+
+# vercel
+.vercel
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local docs (not needed in build context)
+CLAUDE.md
+PLAN*.md
+PLANMIGR.md
+evovl.md
+
+# misc
+.DS_Store
+*.pem
+example
