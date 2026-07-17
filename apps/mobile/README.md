@@ -26,6 +26,15 @@ Go** (no native build — that's phase 5 / EAS).
    EXPO_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_...
    ```
 
+   Optional third variable — the public web origin the app talks to (admin API,
+   real-render + QA WebViews):
+   ```
+   EXPO_PUBLIC_BASE_URL=https://cenacrew.com   # default when unset
+   ```
+   Override it to point the app at a Vercel preview when validating the
+   multi-zone cutover, without rebuilding the production APK. For EAS builds,
+   register it as an EAS env var the same way as the Supabase ones (see below).
+
 ## Run (Expo Go)
 
 ```bash

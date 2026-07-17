@@ -4,10 +4,11 @@ import { ActivityIndicator, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
 import { Eyebrow, tap } from "../../components/ui";
+import { BASE_URL } from "../../lib/config";
 import { useDashboards } from "../../lib/dashboards";
 import { space, useTheme } from "../../lib/theme";
 
-const PUBLIC_BASE = "https://www.cenacrew.com/qrcode";
+const PUBLIC_BASE = `${BASE_URL}/qrcode`;
 
 // One-tap real render (phase 4.5): shows the actual public dashboard inside the
 // app via a WebView (bundled with Expo Go), no browser needed. Opens the URL of
